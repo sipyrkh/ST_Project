@@ -1,0 +1,23 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Test suite" parallel="tests" thread-count="3">
+    <test name="testing-firefox">
+        <parameter name="driver-name" value="firefox"/>
+        <classes>
+            <class name="tests.StContactTest"/>
+        </classes>
+    </test>
+
+    <test name="testing-chrome">
+        <parameter name="driver-name" value="chrome"/>
+        <classes>
+            <class name="tests.StContactTest"/>
+        </classes>
+    </test>
+
+    <test name="testing-ie">
+        <parameter name="driver-name" value="ie"/>
+        <classes>
+            <class name="tests.StContactTest"/>
+        </classes>
+    </test>
+</suite>
