@@ -5,13 +5,15 @@ import exceptions.InvalidBrowserException;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+
+import static utils.JsonReader.getBrowserParameter;
 
 public class Browser {
 
@@ -29,9 +31,9 @@ public class Browser {
                     WebDriverManager.firefoxdriver().setup();
                     driver = new FirefoxDriver();
                     break;
-                case Browsers.IE:
-                    WebDriverManager.iedriver().setup();
-                    driver = new InternetExplorerDriver();
+                case Browsers.EDGE:
+                    WebDriverManager.edgedriver().setup();
+                    driver = new EdgeDriver();
                     break;
                 default:
                     throw new InvalidBrowserException("Invalid browser name entered!");
@@ -53,16 +55,16 @@ public class Browser {
                 case Browsers.FIREFOX:
                     capabilities = DesiredCapabilities.firefox();
                     break;
-                case Browsers.IE:
-                    capabilities = DesiredCapabilities.internetExplorer();
+                case Browsers.EDGE:
+                    capabilities = DesiredCapabilities.edge();
                     break;
                 default:
-                    throw new InvalidBrowserException("Invalid browser name entered!");
+                    throw new InvalidBrowserException("Invalid remote browser name entered!");
             }
         } catch (InvalidBrowserException e) {
             e.printStackTrace();
         }
-        return new RemoteWebDriver(new URL("http://192.168.1.4:4444/wd/hub"), capabilities);
+        return new RemoteWebDriver(new URL(getBrowserParameter("hubUrl")), capabilities);
     }
 
     public static Browser getInstance() {

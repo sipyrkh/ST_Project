@@ -8,19 +8,23 @@ import pages.ContactPage;
 import pages.MainPage;
 import tests.base.BaseTest;
 
+import static utils.JsonReader.getTestDataParameter;
+
 public class StContactTest extends BaseTest {
 
-    @Test (priority = 0, description="ST. Contact matching scenario.")
+    @Test(priority = 0, description = "ST. Contact matching scenario.")
     @Description("Test Description: Check that the phone number and email address are correct.")
     public void userCanFindContacts() {
         MainPage mainPage = new MainPage();
         mainPage.openMenu(MenuItems.CONTACTS);
+
         ContactPage contactPage = new ContactPage();
         String actualPhoneNumber = contactPage.getPhoneNumber();
-        Assert.assertEquals(actualPhoneNumber, "+375 17 269–04–00",
-                "Phone numbers aren't equals on 'Contact' page");
+        Assert.assertTrue(actualPhoneNumber.contains(getTestDataParameter("phoneNumber")),
+                "Phone numbers aren't same on 'Contact' page");
+
         String actualEmailAddress = contactPage.getEmailAddress();
-        Assert.assertEquals(actualEmailAddress, "info@st.by",
+        Assert.assertEquals(actualEmailAddress, getTestDataParameter("email"),
                 "Email addresses aren't equals on 'Contact' page");
     }
 }

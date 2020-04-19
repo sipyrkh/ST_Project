@@ -1,0 +1,14 @@
+[
+  {
+    "browser": {
+      "hubUrl": "http://192.168.1.4:4444/wd/hub",
+      "startUrl": "https://www.st.by/"
+    }
+  },
+  {
+    "test_data": {
+      "phoneNumber": "+375 17 269–04–00",
+      "email": "info@st.by"
+    }
+  }
+]
