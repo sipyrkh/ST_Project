@@ -17,10 +17,12 @@ public class StContactTest extends BaseTest {
     public void userCanFindContacts() {
         MainPage mainPage = new MainPage();
         mainPage.openMenu(MenuItems.CONTACTS);
+
         ContactPage contactPage = new ContactPage();
         String actualPhoneNumber = contactPage.getPhoneNumber();
-        Assert.assertSame(actualPhoneNumber, getTestDataParameter("phoneNumber"),
+        Assert.assertTrue(actualPhoneNumber.contains(getTestDataParameter("phoneNumber")),
                 "Phone numbers aren't same on 'Contact' page");
+
         String actualEmailAddress = contactPage.getEmailAddress();
         Assert.assertEquals(actualEmailAddress, getTestDataParameter("email"),
                 "Email addresses aren't equals on 'Contact' page");

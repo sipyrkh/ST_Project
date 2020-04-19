@@ -5,8 +5,8 @@ import exceptions.InvalidBrowserException;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
@@ -31,9 +31,9 @@ public class Browser {
                     WebDriverManager.firefoxdriver().setup();
                     driver = new FirefoxDriver();
                     break;
-                case Browsers.IE:
-                    WebDriverManager.iedriver().setup();
-                    driver = new InternetExplorerDriver();
+                case Browsers.EDGE:
+                    WebDriverManager.edgedriver().setup();
+                    driver = new EdgeDriver();
                     break;
                 default:
                     throw new InvalidBrowserException("Invalid browser name entered!");
@@ -55,8 +55,8 @@ public class Browser {
                 case Browsers.FIREFOX:
                     capabilities = DesiredCapabilities.firefox();
                     break;
-                case Browsers.IE:
-                    capabilities = DesiredCapabilities.internetExplorer();
+                case Browsers.EDGE:
+                    capabilities = DesiredCapabilities.edge();
                     break;
                 default:
                     throw new InvalidBrowserException("Invalid remote browser name entered!");

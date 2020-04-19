@@ -2,6 +2,7 @@ package tests.base;
 
 import browser.Browser;
 import com.codeborne.selenide.WebDriverRunner;
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -15,6 +16,7 @@ import static utils.JsonReader.getBrowserParameter;
 
 public class BaseTest {
 
+    @Step("Initializing driver and navigating to 'Main' page")
     @Parameters("driver-name")
     @BeforeClass
     public void setUp(String browserName) throws MalformedURLException {
