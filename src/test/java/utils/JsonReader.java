@@ -12,23 +12,35 @@ import java.nio.file.Paths;
 
 public class JsonReader {
 
-    private static final String BROWSER_SETTINGS_FILE_NAME = "browser.json";
+    private static final String BROWSER_SETTINGS_FILE_NAME = "config.json";
+    private static final String BROWSER_SETTINGS_BLOCK_NAME = "browser";
+    private static final String TEST_DATA_BLOCK_NAME = "test_data";
+    private static final Integer BROWSER_SETTINGS_BLOCK_INDEX = 0;
+    private static final Integer TEST_DATA_BLOCK_INDEX = 1;
 
-    public static void main(String[] args) throws IOException, ParseException {
-        JSONParser jsonParser = new JSONParser();
-        try (FileReader reader = new FileReader(getPathToFile(BROWSER_SETTINGS_FILE_NAME))) {
-            Object obj = jsonParser.parse(reader);
-            JSONArray employeeList = (JSONArray) obj;
-            parseEmployeeObject((JSONObject) employeeList.get(0));
-        }
+    public static String getTestDataParameter(String parameter) {
+        JSONArray jsonArray = parseJson();
+        JSONObject jsonObject = (JSONObject) jsonArray.get(TEST_DATA_BLOCK_INDEX);
+        JSONObject remoteParameter = (JSONObject) jsonObject.get(TEST_DATA_BLOCK_NAME);
+        return (String) remoteParameter.get(parameter);
     }
 
-    private static void parseEmployeeObject(JSONObject employee) {
-        JSONObject employeeObject = (JSONObject) employee.get("test_data");
-        String firstName = (String) employeeObject.get("phoneNumber");
-        System.out.println(firstName);
-        String lastName = (String) employeeObject.get("email");
-        System.out.println(lastName);
+    public static String getBrowserParameter(String parameter) {
+        JSONArray jsonArray = parseJson();
+        JSONObject jsonObject = (JSONObject) jsonArray.get(BROWSER_SETTINGS_BLOCK_INDEX);
+        JSONObject remoteParameter = (JSONObject) jsonObject.get(BROWSER_SETTINGS_BLOCK_NAME);
+        return (String) remoteParameter.get(parameter);
+    }
+
+    private static JSONArray parseJson() {
+        JSONArray jsonArray = null;
+        try (FileReader reader = new FileReader(getPathToFile(BROWSER_SETTINGS_FILE_NAME))) {
+            Object obj = new JSONParser().parse(reader);
+            jsonArray = (JSONArray) obj;
+        } catch (IOException | ParseException e) {
+            e.printStackTrace();
+        }
+        return jsonArray;
     }
 
     private static String getPathToFile(String filename) {

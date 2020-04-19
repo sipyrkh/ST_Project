@@ -13,6 +13,8 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import static utils.JsonReader.getBrowserParameter;
+
 public class Browser {
 
     private static Browser instanceDriver = null;
@@ -57,12 +59,12 @@ public class Browser {
                     capabilities = DesiredCapabilities.internetExplorer();
                     break;
                 default:
-                    throw new InvalidBrowserException("Invalid browser name entered!");
+                    throw new InvalidBrowserException("Invalid remote browser name entered!");
             }
         } catch (InvalidBrowserException e) {
             e.printStackTrace();
         }
-        return new RemoteWebDriver(new URL("http://192.168.1.4:4444/wd/hub"), capabilities);
+        return new RemoteWebDriver(new URL(getBrowserParameter("hubUrl")), capabilities);
     }
 
     public static Browser getInstance() {

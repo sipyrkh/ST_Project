@@ -11,6 +11,7 @@ import java.net.MalformedURLException;
 
 import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.WebDriverRunner.closeWebDriver;
+import static utils.JsonReader.getBrowserParameter;
 
 public class BaseTest {
 
@@ -20,7 +21,7 @@ public class BaseTest {
         WebDriver driver = Browser.getInstance().getRemoteDriver(browserName);
         driver.manage().window().maximize();
         WebDriverRunner.setWebDriver(driver);
-        open("https://www.st.by/");
+        open(getBrowserParameter("startUrl"));
     }
 
     @AfterClass
