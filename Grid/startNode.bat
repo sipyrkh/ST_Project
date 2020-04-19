@@ -1,0 +1,1 @@
+java -Dwebdriver.chrome.driver="C:\Users\Artyom\Desktop\Grid\drivers\chromedriver.exe" -Dwebdriver.gecko.driver="C:\Users\Artyom\Desktop\Grid\drivers\geckodriver.exe" -Dwebdriver.ie.driver="C:\Users\Artyom\Desktop\Grid\drivers\IEDriverServer.exe" -jar selenium-server-standalone-3.141.59.jar -role node -hub http://192.168.1.4:4444/grid/register/
