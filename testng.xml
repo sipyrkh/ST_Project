@@ -14,8 +14,8 @@
         </classes>
     </test>
 
-    <test name="testing-edge">
-        <parameter name="driver-name" value="edge"/>
+    <test name="testing-ie">
+        <parameter name="driver-name" value="ie"/>
         <classes>
             <class name="tests.StContactTest"/>
         </classes>

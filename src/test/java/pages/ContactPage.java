@@ -8,6 +8,11 @@ import static com.codeborne.selenide.Selenide.*;
 
 public class ContactPage {
 
+    @Step("Checking contact area visibility on 'Contact' page")
+    public boolean isContactAreaDisplayed() {
+        return getContactAreaLbl().isDisplayed();
+    }
+
     @Step("Getting phone number from 'Contact' page")
     public String getPhoneNumber() {
         return getPhoneNumberLbl().getText();
@@ -24,5 +29,9 @@ public class ContactPage {
 
     private SelenideElement getEmailAddressLbl() {
         return $(By.xpath("//div[contains(@class, 'contacts_area')]//span//a"));
+    }
+
+    private SelenideElement getContactAreaLbl() {
+        return $(By.xpath("//div[contains(@class, 'contact') and contains(@class, 'area')]"));
     }
 }

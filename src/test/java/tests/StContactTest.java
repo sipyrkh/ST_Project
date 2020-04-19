@@ -19,9 +19,12 @@ public class StContactTest extends BaseTest {
         mainPage.openMenu(MenuItems.CONTACTS);
 
         ContactPage contactPage = new ContactPage();
+        Assert.assertTrue(contactPage.isContactAreaDisplayed(),
+                "Contact area isn't displayed on 'Contact' page");
+
         String actualPhoneNumber = contactPage.getPhoneNumber();
         Assert.assertTrue(actualPhoneNumber.contains(getTestDataParameter("phoneNumber")),
-                "Phone numbers aren't same on 'Contact' page");
+                "Phone numbers aren't equals on 'Contact' page");
 
         String actualEmailAddress = contactPage.getEmailAddress();
         Assert.assertEquals(actualEmailAddress, getTestDataParameter("email"),
